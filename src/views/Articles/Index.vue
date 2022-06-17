@@ -1,7 +1,14 @@
 <template>
   <div class="articles">
     <Header :light-index="1"></Header>
+
     <div class="content">
+      <div
+        v-if="isPC"
+        class="right"
+      >
+        <RightConfig></RightConfig>
+      </div>
       <div :class="[{'wap-left': !isPC},'left']">
         <mu-card
           class="card"
@@ -92,14 +99,15 @@
 </template>
 
 <script>
-// import { randomColor } from '@/utils/index.js'
+import RightConfig from '@/components/RightConfig.vue'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 export default {
   name: 'articles',
   components: {
     Header,
-    Footer
+    Footer,
+    RightConfig
   },
   data() {
     return {
