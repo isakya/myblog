@@ -11,16 +11,17 @@
       <Footer fixed></Footer>
       <div class="content">
         <div class="tags-wap tagcloud">
-          <a
+          <router-link
             v-for="item in tags"
             :key="item.name"
             class="tag"
+            :to="{name:'tagsDetails', query: {id:item.name}}"
           >
             <mu-chip
               v-if="item.articleNum > 0"
               :color="item.color"
             >{{item.name}}{{item.articleNum}}</mu-chip>
-          </a>
+          </router-link>
         </div>
       </div>
     </div>
