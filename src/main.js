@@ -10,7 +10,7 @@ Vue.prototype.isPC = isPC
 import './global.less'
 import 'lib-flexible'
 import 'muse-ui/lib/styles/base.less'
-import { Button, Select, AppBar, Icon, Menu, List, Popover, Avatar, BottomSheet, Paper, Pagination } from 'muse-ui'
+import { Button, Select, AppBar, Icon, Menu, List, Popover, Avatar, BottomSheet, Paper, Pagination, Chip } from 'muse-ui'
 import 'muse-ui/lib/styles/theme.less'
 Vue.use(Button)
 Vue.use(Select)
@@ -23,6 +23,7 @@ Vue.use(Avatar)
 Vue.use(BottomSheet)
 Vue.use(Paper)
 Vue.use(Pagination)
+Vue.use(Chip)
 
 
 new Vue({

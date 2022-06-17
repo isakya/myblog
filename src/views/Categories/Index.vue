@@ -120,7 +120,6 @@
         <Footer v-if="!isPC"></Footer>
       </div>
     </div>
-
   </div>
 </template>
 
