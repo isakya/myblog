@@ -39,6 +39,11 @@ const routes = [
     path: '/tags/details',
     name: 'tagsDetails',
     component: () => import(/* webpackChunkName: "about" */ '@/views/Tags/Details.vue')
+  },
+  {
+    path: '/about',
+    name: 'about',
+    component: () => import(/* webpackChunkName: "about" */ '@/views/About/Index.vue')
   }
 ]
 
