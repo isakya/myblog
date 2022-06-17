@@ -2,6 +2,7 @@
   <div>
     <index-animation></index-animation>
     <Header background="transparent"></Header>
+    <Footer fixed></Footer>
     <div class="common">
       <div class="home">
         {{info.introduction}}
@@ -12,14 +13,18 @@
 
 <script>
 import Header from '@/components/Header'
+import Footer from '@/components/Footer'
 import IndexAnimation from '@/components/IndexAnimation'
+
+
 let i = 0
 let timer = null
 export default {
   name: 'index',
   components: {
     IndexAnimation,
-    Header
+    Header,
+    Footer
   },
   data() {
     return {
