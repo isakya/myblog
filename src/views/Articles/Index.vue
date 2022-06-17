@@ -12,6 +12,7 @@
       <div :class="[{'wap-left': !isPC},'left']">
         <mu-card
           class="card"
+          @click="goDetail(item)"
           v-for="item in info.list"
           :key="item._id"
         >
@@ -166,6 +167,16 @@ export default {
           },
         ],
       }
+    }
+  },
+  methods: {
+    goDetail(item) {
+      this.$router.push({
+        name: 'articlesDetails',
+        query: {
+          id: item._id
+        }
+      })
     }
   }
 }

@@ -12,7 +12,7 @@ Vue.prototype.avatar = "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fi0
 import './global.less'
 import 'lib-flexible'
 import 'muse-ui/lib/styles/base.less'
-import { Button, Select, AppBar, Icon, Menu, List, Popover, Avatar, BottomSheet, Paper, Pagination, Chip, Carousel, Card } from 'muse-ui'
+import { Button, Select, AppBar, Icon, Menu, List, Popover, Avatar, BottomSheet, Paper, Pagination, Chip, Carousel, Card, Tooltip } from 'muse-ui'
 import 'muse-ui/lib/styles/theme.less'
 Vue.use(Button)
 Vue.use(Select)
@@ -28,6 +28,7 @@ Vue.use(Pagination)
 Vue.use(Chip)
 Vue.use(Carousel)
 Vue.use(Card)
+Vue.use(Tooltip)
 
 Vue.use(VueLazyload, {
   preLoad: 1.3,
