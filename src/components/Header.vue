@@ -5,7 +5,7 @@
       :color="background"
     >
       <!-- 昵称 -->
-      <span style="cursor: pointer;">{{isPC}}Dinosaur-Egg </span>
+      <span style="cursor: pointer;">Dinosaur-Egg </span>
       <!-- 头像 -->
       <!-- <mu-avatar
         slot="left"
