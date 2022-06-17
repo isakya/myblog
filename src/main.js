@@ -3,7 +3,8 @@ import App from './App.vue'
 import router from './router'
 
 Vue.config.productionTip = false
-
+import './global.less'
+import 'lib-flexible'
 import 'muse-ui/lib/styles/base.less'
 import { Button, Select } from 'muse-ui'
 import 'muse-ui/lib/styles/theme.less'
