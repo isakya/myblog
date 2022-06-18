@@ -159,7 +159,7 @@
             @click="showToolBtn = !showToolBtn"
             class="search-fab"
           >
-            <mu-icon vlaue="adb"></mu-icon>
+            <mu-icon value="adb"></mu-icon>
           </mu-button>
         </mu-tooltip>
         <mu-slide-left-transition>
