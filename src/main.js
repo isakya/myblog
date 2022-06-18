@@ -14,7 +14,7 @@ import './global.less'
 import 'lib-flexible'
 import 'muse-ui/lib/styles/base.less'
 import Toast from "muse-ui-toast"
-import { Button, Select, AppBar, Icon, Menu, List, Popover, Avatar, BottomSheet, Paper, Pagination, Chip, Carousel, Card, Tooltip, Snackbar, TextField, Dialog } from 'muse-ui'
+import { Button, Select, AppBar, Icon, Menu, List, Popover, Avatar, BottomSheet, Paper, Pagination, Chip, Carousel, Card, Tooltip, Snackbar, TextField, Dialog, Divider, Badge } from 'muse-ui'
 import 'muse-ui/lib/styles/theme.less'
 
 
@@ -36,6 +36,8 @@ Vue.use(Tooltip)
 Vue.use(Snackbar)
 Vue.use(TextField)
 Vue.use(Dialog)
+Vue.use(Divider)
+Vue.use(Badge)
 
 Vue.use(Toast, {
   position: "top", // 弹出的位置
@@ -54,6 +56,11 @@ Vue.use(VueLazyload, {
   loading: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farticle%2F93883e3013357c785539962e9ce4c366cfd7b2e8.jpg&refer=http%3A%2F%2Fi0.hdslb.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1658080692&t=e92666b676e97b7cb580fb7d0c342f8a',
   attempt: 1
 })
+
+import * as filters from './filter'
+Object.keys(filters).forEach((k) => Vue.filter(k, filters[k])) // 注册过滤器
+// 挂到原型上就可以在模板上直接使用，也可以在js里用this调用
+Vue.prototype.filterDate = filters.filterDate
 
 new Vue({
   router,
