@@ -74,11 +74,27 @@
         :trigger="triggerTheme"
       >
         <mu-list>
-          <mu-list-item button>
-            <mu-list-item-title>Light</mu-list-item-title>
+          <mu-list-item
+            button
+            @click="toggleTheme('selfLight')"
+          >
+            <mu-list-item-title>
+              <mu-icon
+                :color="me === 'selfLight' ? 'primary': '' "
+                value="brightness_7"
+              ></mu-icon>
+            </mu-list-item-title>
           </mu-list-item>
-          <mu-list-item button>
-            <mu-list-item-title>Dark</mu-list-item-title>
+          <mu-list-item
+            button
+            @click="toggleTheme('selfDark')"
+          >
+            <mu-list-item-title>
+              <mu-icon
+                :color="me === 'selfDark' ? 'primary': '' "
+                value="brightness_4"
+              ></mu-icon>
+            </mu-list-item-title>
           </mu-list-item>
         </mu-list>
       </mu-popover>
@@ -100,7 +116,12 @@
         :trigger="triggerUser"
       >
         <mu-list>
-          <mu-list-item button>
+          <mu-list-item
+            button
+            @click="$router.push({
+              name: 'user'
+            })"
+          >
             <mu-list-item-title>个人中心</mu-list-item-title>
           </mu-list-item>
           <mu-list-item button>
@@ -272,7 +293,8 @@ export default {
       openRegisterModal: false,
       openLoginModal: false,
       openSearchModal: false,
-      showBackTop: false
+      showBackTop: false,
+      me: ''
     }
   },
   mounted() {
@@ -285,6 +307,7 @@ export default {
           this.showBackTop = false
         }
       }
+    this.initTheme()
   },
   methods: {
     toggleWapMenu(bool) {
@@ -296,7 +319,7 @@ export default {
     toggleLoginModal(bool) {
       this.openLoginModal = bool
     },
-    toggleSearchModalf(bool) {
+    toggleSearchModal(bool) {
       this.openSearchModal = bool
     },
     go(item) {
@@ -308,6 +331,22 @@ export default {
     },
     scrollTop() {
       document.body.scrollIntoView({ block: 'start', behavior: "smooth" })
+    },
+    toggleTheme(me) {
+      this.theme.use(me)
+      this.me = me
+      localStorage.setItem('theme', me)
+      this.openTheme = false
+    },
+    initTheme() {
+      const hours = new Date().getHours()
+      let defaultTheme = ''
+      if (hours >= 8 && hours <= 18) {
+        defaultTheme = 'selfLight'
+      } else {
+        defaultTheme = 'selfDark'
+      }
+      this.me = localStorage.getItem('theme') || defaultTheme
     }
   }
 }
