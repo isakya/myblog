@@ -219,6 +219,11 @@
               :articleTitle="info.title"
             ></CommentList>
           </mu-card>
+
+          <PrevNext
+            :prev="prev"
+            :next="next"
+          ></PrevNext>
         </div>
       </div>
     </div>
@@ -237,6 +242,7 @@ import { markdown } from '@/utils/markdown'
 import Clipboard from "clipboard"
 import Commonent from '@/components/Commonent'
 import CommentList from '@/components/CommentList'
+import PrevNext from '@/components/PrevNext.vue'
 
 export default {
   name: 'articlesDetails',
@@ -246,10 +252,59 @@ export default {
     RightConfig,
     mavonEditor,
     Commonent,
-    CommentList
+    CommentList,
+    PrevNext
   },
   data() {
     return {
+      prev: {
+        categories: "技术",
+        collect: 0,
+        comment: 0,
+        content:
+          "### 1.toRefs↵把一个响应式对象转换成普通对象，该普通对象的每个 property 都是一个 ref↵↵`应用`: ",
+        cover: "http://nevergiveupt.top/vue/vue_composition_api.jpeg",
+        createTime: 1611739740,
+        introduction:
+          "toRefs把一个响应式对象转换成普通对象，该普通对象的每个 property 都是一个 ref ，和响应式对象 property 一一对应。",
+        isCollect: true,
+        isComment: true,
+        isLike: true,
+        isReward: false,
+        like: 0,
+        publishStatus: 1,
+        sort: 0,
+        status: 1,
+        tags: ["Vue"],
+        title: "Vue3.x-toRefs & shallowReactive & shallowRef & shallowReadonly",
+        updateTime: 1611739813,
+        views: 5,
+        _id: "6011325cc4ae0128013d3210",
+      },
+      next: {
+        categories: "技术",
+        collect: 0,
+        comment: 0,
+        content:
+          "### 1.注册GitHub账号并创建一个OAuth Apps↵↵登录GitHub账号然后右上角找到你的头像点击",
+        cover: "http://nevergiveupt.top/egg/github_signin.png",
+        createTime: 1612341189,
+        introduction:
+          "『登录鉴权』 是一个常见的业务场景，包括『账号密码登录方式』和『第三方统一登录』。其中，后者我们经常使用到，如 Google， GitHub，QQ 统一登录，它们都是基于 OAuth 规范。",
+        isCollect: true,
+        isComment: true,
+        isLike: true,
+        isReward: true,
+        like: 1,
+        publishStatus: 1,
+        sort: 0,
+        status: 1,
+        tags: ["Node.js", "Egg"],
+        title: "使用Egg通过GitHub来实现用户登录",
+        updateTime: 1612341807,
+        views: 6,
+        _id: "601a5fc5e268db458626523d",
+      },
       info: {
         _id: '1',
         title: 'n=d&word=坂井泉水%20写真&step_word=&hs=0&pn=40&spn=0&di=710813',
