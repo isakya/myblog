@@ -121,6 +121,7 @@
             v-show="showToolBtn"
             fab
             color="primary"
+            @click="openLoginModal=true;showToolBtn=false"
           >
             登陆
           </mu-button>
@@ -144,7 +145,11 @@
           <mu-button
             fab
             color="error"
-            v-show="showToolBtn && info.openSearch"
+            @click="openSearchModal=true;showToolBtn=false"
+            v-show="
+            showToolBtn
+            &&
+            info.openSearch"
           >
             搜索
           </mu-button>
@@ -154,7 +159,7 @@
         class="tool-row"
         v-if="info.register && !user"
       >
-        <mu-slide-left-transition>
+        <mu-slide-bottom-transition>
           <mu-button
             fab
             color="warning"
@@ -163,13 +168,38 @@
           >
             注册
           </mu-button>
-        </mu-slide-left-transition>
+        </mu-slide-bottom-transition>
       </div>
     </div>
     <RegisterForm
       :open="openRegisterModal"
       @toggle="toggleRegisterModal"
     ></RegisterForm>
+    <LoginForm
+      :open="openLoginModal"
+      @toggle="toggleLoginModal"
+    ></LoginForm>
+    <SearchForm
+      :open="openSearchModal"
+      @toggle="toggleSearchModal"
+    ></SearchForm>
+
+    <mu-slide-bottom-transition>
+      <mu-tooltip
+        placement="top"
+        content="Top"
+      >
+        <mu-button
+          fab
+          @click="scrollTop"
+          v-show="showBackTop"
+          class="back-top"
+          color="secondary"
+        >
+          <mu-icon value="arrow_upward"></mu-icon>
+        </mu-button>
+      </mu-tooltip>
+    </mu-slide-bottom-transition>
   </div>
 </template>
 
@@ -207,6 +237,8 @@ const menus = [
   }
 ]
 import RegisterForm from './RegisterForm'
+import LoginForm from './LoginForm'
+import SearchForm from './SearchForm'
 export default {
   props: {
     lightIndex: {
@@ -218,7 +250,9 @@ export default {
     }
   },
   components: {
-    RegisterForm
+    RegisterForm,
+    LoginForm,
+    SearchForm
   },
   data() {
     return {
@@ -235,19 +269,35 @@ export default {
       openWapMenu: false,
       showToolBtn: false,
       user: null && JSON.parse(localStorage.getItem('user')),
-      openRegisterModal: false
+      openRegisterModal: false,
+      openLoginModal: false,
+      openSearchModal: false,
+      showBackTop: false
     }
   },
   mounted() {
     this.triggerTheme = this.$refs.theme.$el
-    this.triggerUser = this.$refs.user.$el
+    this.triggerUser = this.$refs.user.$el,
+      window.onscroll = () => {
+        if (document.documentElement.scrollTop + document.body.scrollTop > 100) {
+          this.showBackTop = true
+        } else {
+          this.showBackTop = false
+        }
+      }
   },
   methods: {
+    toggleWapMenu(bool) {
+      this.openLoginModal = bool
+    },
     toggleRegisterModal(bool) {
       this.openRegisterModal = bool
     },
-    toggleWapMenu(bool) {
-      this.openWapMenu = bool
+    toggleLoginModal(bool) {
+      this.openLoginModal = bool
+    },
+    toggleSearchModalf(bool) {
+      this.openSearchModal = bool
     },
     go(item) {
       // 当前路由跟跳转路由相同 则取消跳转
@@ -255,6 +305,9 @@ export default {
       this.$router.push({
         name: item.router
       })
+    },
+    scrollTop() {
+      document.body.scrollIntoView({ block: 'start', behavior: "smooth" })
     }
   }
 }
@@ -304,5 +357,11 @@ export default {
       margin-right: 20px;
     }
   }
+}
+.back-top {
+  position: fixed;
+  right: 0.26667rem;
+  bottom: 0.4rem;
+  background: #595959;
 }
 </style>

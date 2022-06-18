@@ -14,7 +14,7 @@ import './global.less'
 import 'lib-flexible'
 import 'muse-ui/lib/styles/base.less'
 import Toast from "muse-ui-toast"
-import { Button, Select, AppBar, Icon, Menu, List, Popover, Avatar, BottomSheet, Paper, Pagination, Chip, Carousel, Card, Tooltip, Snackbar, TextField, Dialog, Divider, Badge, Form } from 'muse-ui'
+import { Button, Select, AppBar, Icon, Menu, List, Popover, Avatar, BottomSheet, Paper, Pagination, Chip, Carousel, Card, Tooltip, Snackbar, TextField, Dialog, Divider, Badge, Form, AutoComplete } from 'muse-ui'
 import 'muse-ui/lib/styles/theme.less'
 
 
@@ -39,6 +39,7 @@ Vue.use(Dialog)
 Vue.use(Divider)
 Vue.use(Badge)
 Vue.use(Form)
+Vue.use(AutoComplete)
 
 Vue.use(Toast, {
   position: "top", // 弹出的位置
