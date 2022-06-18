@@ -10,9 +10,11 @@
           <div class="title">
             文章目录
           </div>
-          <div>
-            <a href="">标题1</a>
-            <a href="">标题2</a>
+          <div
+            v-for="item in toc"
+            :key="item.name"
+          >
+            <a @click="scroolToPosition(item.href)">{{item.name}}</a>
           </div>
         </div>
       </mu-card>
@@ -127,7 +129,17 @@
                 2022-05-20 13:14
               </mu-button>
             </mu-card-actions>
-            <div>md内容</div>
+
+            <mavonEditor
+              v-model="content"
+              defaultOpen="preview"
+              :toolbarsFlag="false"
+              :subfield="false"
+              :isshljs="true"
+              :navigation="isPC"
+              codeStyle="tomorrow-night-eighties"
+            ></mavonEditor>
+
             <mu-card-actions>
               <mu-button
                 class="cursor-default"
@@ -194,12 +206,19 @@
 import RightConfig from '@/components/RightConfig.vue'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import $ from 'jquery'
+import { mavonEditor } from "mavon-editor"
+import "mavon-editor/dist/css/index.css"
+import { markdown } from '@/utils/markdown'
+import Clipboard from "clipboard"
+
 export default {
   name: 'articlesDetails',
   components: {
     Header,
     Footer,
-    RightConfig
+    RightConfig,
+    mavonEditor
   },
   data() {
     return {
@@ -208,7 +227,43 @@ export default {
         introduction: 'werwaslkdfjasanfowijeoiqjwerjjalskfalskdjfksldjflkajsdklfjaskljiweqrip按实际发神经为二抗击倭寇技术附件as服科技阿斯利康附件为若即若离卡加斯发生了看得见反馈拉水电费是',
         cover: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg3.doubanio.com%2Fview%2Fphoto%2Fm%2Fpublic%2Fp2666075760.jpg&refer=http%3A%2F%2Fimg3.doubanio.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1658091590&t=79f01f99927f99f8638d12c69f43dc2f'
       },
-      toc: []
+      toc: [],
+      content: ""
+    }
+  },
+  mounted() {
+    this.content = markdown(mavonEditor, "在前端开发中， html 转 pdf 是最常见的需求，实现这块需求的开发[html2canvas](http://html2canvas.hertzen.com/)和 [jspdf](http://mozilla.github.io/pdf.js/getting_started/) 是最常用的两个插件，插件都是现成的。\n### 1.安装\n### 2.使用 \n ```js \n console.log(123); \n```")
+    this.$nextTick(() => {
+      const aArr = $('.v-note-wrapper .v-note-panel .v-note-navigation-wrapper .v-note-navigation-content a').toArray()
+      let toc = []
+      aArr.forEach(item => {
+        let href = $(item).attr('id')
+        let name = $(item).parent().text()
+        if (href) {
+          toc.push({
+            href: '#' + href,
+            name,
+          })
+        }
+      })
+      this.toc = toc
+    })
+    this.$nextTick(() => {
+      let clipboard = new Clipboard(".copy-btn")
+      // 复制成功失败的提示
+      clipboard.on("success", () => {
+        this.$toast.success("复制成功")
+      })
+      clipboard.on("error", () => {
+        this.$toast.error("复制失败")
+      })
+    })
+  },
+  methods: {
+    scroolToPosition(id) {
+      let position = $(id).offset()
+      position.top = position.top - 80
+      $('html,body').animate({ scrollTop: position.top }, 1000)
     }
   }
 }

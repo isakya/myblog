@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router'
 import VueLazyload from 'vue-lazyload'
 
+
 Vue.config.productionTip = false
 
 import { isPC } from '@/utils'
@@ -12,8 +13,11 @@ Vue.prototype.avatar = "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fi0
 import './global.less'
 import 'lib-flexible'
 import 'muse-ui/lib/styles/base.less'
-import { Button, Select, AppBar, Icon, Menu, List, Popover, Avatar, BottomSheet, Paper, Pagination, Chip, Carousel, Card, Tooltip } from 'muse-ui'
+import Toast from "muse-ui-toast"
+import { Button, Select, AppBar, Icon, Menu, List, Popover, Avatar, BottomSheet, Paper, Pagination, Chip, Carousel, Card, Tooltip, Snackbar } from 'muse-ui'
 import 'muse-ui/lib/styles/theme.less'
+
+
 Vue.use(Button)
 Vue.use(Select)
 Vue.use(AppBar)
@@ -29,6 +33,18 @@ Vue.use(Chip)
 Vue.use(Carousel)
 Vue.use(Card)
 Vue.use(Tooltip)
+Vue.use(Snackbar)
+
+Vue.use(Toast, {
+  position: "top", // 弹出的位置
+  time: 2000, // 显示的时长
+  closeIcon: "close", // 关闭的图标
+  close: true, // 是否显示关闭按钮
+  successIcon: "check_circle", // 成功信息图标
+  infoIcon: "info", // 信息信息图标
+  warningIcon: "priority_high", // 提醒信息图标
+  errorIcon: "warning", // 错误信息图标
+})
 
 Vue.use(VueLazyload, {
   preLoad: 1.3,
