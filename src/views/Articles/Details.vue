@@ -50,6 +50,7 @@
           content="评论"
         >
           <mu-button
+            @click="scroolToPosition('#comment')"
             fab
             color="red"
           >
@@ -195,6 +196,15 @@
               </mu-button>
             </mu-tooltip>
           </div>
+          <mu-card
+            class="card"
+            id="comment"
+          >
+            <Commonent
+              @comment="comment"
+              :commentSuccess="commentSuccess"
+            ></Commonent>
+          </mu-card>
         </div>
       </div>
     </div>
@@ -211,6 +221,7 @@ import { mavonEditor } from "mavon-editor"
 import "mavon-editor/dist/css/index.css"
 import { markdown } from '@/utils/markdown'
 import Clipboard from "clipboard"
+import Commonent from '@/components/Commonent'
 
 export default {
   name: 'articlesDetails',
@@ -218,7 +229,7 @@ export default {
     Header,
     Footer,
     RightConfig,
-    mavonEditor
+    mavonEditor, Commonent
   },
   data() {
     return {
@@ -228,7 +239,8 @@ export default {
         cover: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg3.doubanio.com%2Fview%2Fphoto%2Fm%2Fpublic%2Fp2666075760.jpg&refer=http%3A%2F%2Fimg3.doubanio.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1658091590&t=79f01f99927f99f8638d12c69f43dc2f'
       },
       toc: [],
-      content: ""
+      content: "",
+      commentSuccess: false
     }
   },
   mounted() {
@@ -264,6 +276,10 @@ export default {
       let position = $(id).offset()
       position.top = position.top - 80
       $('html,body').animate({ scrollTop: position.top }, 1000)
+    },
+    comment(data) {
+      console.log('评论', data)
+      this.commentSuccess = true
     }
   }
 }

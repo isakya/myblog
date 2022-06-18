@@ -183,3 +183,12 @@ pre.hljs::after {
 .markdown-body img {
   width: 100%;
 }
+
+// 清除浮动
+.clearfix::after, .clearfix::before {
+  content: "";
+  display: block;
+  clear: both;
+  visibility: hidden;
+  height: 0;
+}
