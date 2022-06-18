@@ -109,6 +109,67 @@
         </mu-list>
       </mu-popover>
     </mu-appbar>
+
+    <!-- 登陆弹框 -->
+    <div class="tool">
+      <div
+        class="tool-row"
+        v-if="info.login && !user"
+      >
+        <mu-slide-left-transition>
+          <mu-button
+            v-show="showToolBtn"
+            fab
+            color="primary"
+          >
+            登陆
+          </mu-button>
+        </mu-slide-left-transition>
+      </div>
+      <div class="tool-row">
+        <mu-tooltip
+          placement="right-start"
+          content="登陆/注册/搜索"
+        >
+          <mu-button
+            color="info"
+            fab
+            @click="showToolBtn = !showToolBtn"
+            class="search-fab"
+          >
+            <mu-icon vlaue="adb"></mu-icon>
+          </mu-button>
+        </mu-tooltip>
+        <mu-slide-left-transition>
+          <mu-button
+            fab
+            color="error"
+            v-show="showToolBtn && info.openSearch"
+          >
+            搜索
+          </mu-button>
+        </mu-slide-left-transition>
+      </div>
+      <div
+        class="tool-row"
+        v-if="info.register && !user"
+      >
+        <mu-slide-left-transition>
+          <mu-button
+            fab
+            color="warning"
+            v-show="showToolBtn"
+            @click="openRegisterModal=true; showToolBtn=false"
+          >
+            注册
+          </mu-button>
+        </mu-slide-left-transition>
+      </div>
+    </div>
+    <RegisterForm
+      :open="openRegisterModal"
+      @toggle="toggleRegisterModal"
+    ></RegisterForm>
   </div>
 </template>
 
@@ -145,7 +206,7 @@ const menus = [
     icon: "perm_identity",
   }
 ]
-
+import RegisterForm from './RegisterForm'
 export default {
   props: {
     lightIndex: {
@@ -156,16 +217,25 @@ export default {
       type: String
     }
   },
+  components: {
+    RegisterForm
+  },
   data() {
     return {
       info: {
-        menu: menus
+        menu: menus,
+        login: true,
+        register: true,
+        openSearch: true
       },
       openTheme: false,
       triggerTheme: null,
       openUser: false,
       triggerUser: null,
-      openWapMenu: false
+      openWapMenu: false,
+      showToolBtn: false,
+      user: null && JSON.parse(localStorage.getItem('user')),
+      openRegisterModal: false
     }
   },
   mounted() {
@@ -173,6 +243,9 @@ export default {
     this.triggerUser = this.$refs.user.$el
   },
   methods: {
+    toggleRegisterModal(bool) {
+      this.openRegisterModal = bool
+    },
     toggleWapMenu(bool) {
       this.openWapMenu = bool
     },
@@ -217,6 +290,19 @@ export default {
     text-overflow: ellipsis;
     white-space: nowrap;
     text-align: right;
+  }
+}
+.tool {
+  position: fixed;
+  left: 0;
+  bottom: 2.6667rem;
+  .tool-row {
+    margin-top: 20px;
+    height: 56px;
+    .search-fab {
+      margin-left: -28px;
+      margin-right: 20px;
+    }
   }
 }
 </style>
